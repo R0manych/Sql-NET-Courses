@@ -9,7 +9,7 @@ CREATE TABLE car
 ( car_id number(10) NOT NULL,
   owner_id number(10) NOT NULL,
   model_auto varchar2 (50) not null,
-  "Year" date not null,
+  "Year" number(4) not null,
   CONSTRAINT car_pk PRIMARY KEY (car_id),
   CONSTRAINT fk_owner
     FOREIGN KEY (owner_id)
