@@ -1,0 +1,58 @@
+create table Owner
+(owner_id number(10) not null,
+Full_name varchar2(50) not null,
+drive_licenses varchar2(20) not null,
+phone varchar2(50) not null,
+CONSTRAINT owner_pk PRIMARY KEY (owner_id)
+);
+CREATE TABLE car
+( car_id number(10) NOT NULL,
+  owner_id number(10) NOT NULL,
+  model_auto varchar2 (50) not null,
+  "Year" date not null,
+  CONSTRAINT car_pk PRIMARY KEY (car_id),
+  CONSTRAINT fk_owner
+    FOREIGN KEY (owner_id)
+    REFERENCES owner(owner_id)
+);
+create table workshop
+(workshop_id number (10),
+"name" varchar2(50),
+adress varchar2(255),
+constraint workshop_pk primary key (workshop_id)
+);
+create table mechanic 
+(m_id number (10),
+Full_name varchar2(50),
+qualification varchar2(50),
+Phone varchar2 (50),
+constraint mechanic_pk primary key (m_id)
+);
+CREATE TABLE order1
+( Or_id number(10) NOT NULL,
+  car_id number(10) NOT NULL,
+  workshop_id number(10) not null,
+  "date" date,
+  "cost" decimal (10,2),
+  date_close date,
+  CONSTRAINT or_pk PRIMARY KEY (or_id),
+  CONSTRAINT fk_car
+    FOREIGN KEY (car_id)
+    REFERENCES car(car_id),
+    CONSTRAINT fk_workshop
+    FOREIGN KEY (workshop_id)
+    REFERENCES workshop(workshop_id)
+);
+
+create table order_mech
+(
+  or_id number(10) NOT NULL,
+  m_id number(10) not null,
+  CONSTRAINT order_mech_pk PRIMARY KEY (or_id,m_id),
+  CONSTRAINT fk_Order
+    FOREIGN KEY (or_id)
+    REFERENCES order1(or_id),
+     CONSTRAINT fk_mechanic
+    FOREIGN KEY (m_id)
+    REFERENCES mechanic(m_id)
+);
